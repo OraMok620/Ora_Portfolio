@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Showcase</title>
+
+<style>
+/* ====== RESET ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* ====== HERO SECTION (SAME STYLE) ====== */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: url('background.jpg') center/cover no-repeat;
+    color: white;
+    padding: 80px 20px 40px;
+}
+
+/* Overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Ensure content above overlay */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ====== TITLE ====== */
+.page-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* ====== FILTER ====== */
+.filter-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.filter-container select {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* ====== PROJECT GRID (MOBILE FIRST) ====== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* ====== CARD ====== */
+.project-card {
+    background: rgba(255,255,255,0.9);
+    border-radius: 16px;
+    overflow: hidden;
+    text-align: center;
+    color: black;
+    transition: 0.3s;
+}
+
+.project-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.project-info {
+    padding: 10px;
+}
+
+.project-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.project-tag {
+    font-size: 0.75rem;
+    color: gray;
+}
+
+/* Hover effect */
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ====== DESKTOP (3 COLUMNS) ====== */
+@media(min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* ====== HAMBURGER ====== */
+.hamburger {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px 0;
+}
+
+/* ====== SIDE MENU ====== */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background: white;
+    padding-top: 60px;
+    transition: 0.3s ease;
+    z-index: 5;
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+}
+
+.side-menu a:hover {
+    background: #f0f0f0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+    <!-- Hamburger -->
+    <div class="hamburger" onclick="openMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="hero-content">
+
+        <!-- Title -->
+        <h1 class="page-title">Showcase</h1>
+
+        <!-- Filter -->
+        <div class="filter-container">
+            <select id="filterSelect" onchange="filterProjects()">
+                <option value="all">All</option>
+                <option value="ux">UX</option>
+                <option value="dev">Development</option>
+                <option value="design">Design</option>
+            </select>
+        </div>
+
+        <!-- Project Grid -->
+        <div class="projects-grid" id="projectsGrid">
+
+            <!-- CARD 1 -->
+            <div class="project-card" data-category="ux">
+                <img src="https://via.placeholder.com/300x200" alt="">
+                <div class="project-info">
+                    <div class="project-title">Project One</div>
+                    <div class="project-tag">UX</div>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="project-card" data-category="dev">
+                <img src="https://via.placeholder.com/300x200" alt="">
+                <div class="project-info">
+                    <div class="project-title">Project Two</div>
+                    <div class="project-tag">Development</div>
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="project-card" data-category="design">
+                <img src="https://via.placeholder.com/300x200" alt="">
+                <div class="project-info">
+                    <div class="project-title">Project Three</div>
+                    <div class="project-tag">Design</div>
+                </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="project-card" data-category="ux">
+                <img src="https://via.placeholder.com/300x200" alt="">
+                <div class="project-info">
+                    <div class="project-title">Project Four</div>
+                    <div class="project-tag">UX</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Side Menu -->
+<div class="side-menu" id="sideMenu">
+    <div class="close-btn" onclick="closeMenu()">✕</div>
+    <a href="index1.html">Home</a>
+    <a href="projects1.html">Projects</a>
+    <a href="#">Personal</a>
+    <a href="#">Contact</a>
+</div>
+
+<script>
+function openMenu() {
+    document.getElementById("sideMenu").classList.add("active");
+}
+
+function closeMenu() {
+    document.getElementById("sideMenu").classList.remove("active");
+}
+
+function filterProjects() {
+    const selected = document.getElementById("filterSelect").value;
+    const cards = document.querySelectorAll(".project-card");
+
+    cards.forEach(card => {
+        const category = card.getAttribute("data-category");
+
+        if (selected === "all" || selected === category) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

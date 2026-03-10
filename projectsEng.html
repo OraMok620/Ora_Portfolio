@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Showcase</title>
+
+<style>
+/* ====== RESET ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* ====== HERO BACKGROUND (same as yours) ====== */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: url('background.jpg') center/cover no-repeat;
+    color: white;
+    padding: 80px 20px 40px;
+}
+
+/* Overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* ====== TITLE ====== */
+.page-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* ====== FILTER ====== */
+.filter-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.filter-select {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.filter-select option {
+    color: black;
+}
+
+/* ====== PROJECT GRID ====== */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mobile: 2 columns */
+    gap: 15px;
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* ====== CARD ====== */
+.project-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+
+.project-info {
+    padding: 10px;
+}
+
+.project-title {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.project-tag {
+    font-size: 0.7rem;
+    opacity: 0.6;
+}
+
+/* ====== HAMBURGER ====== */
+.hamburger {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px 0;
+}
+
+/* ====== SIDE MENU ====== */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background: white;
+    padding-top: 60px;
+    transition: 0.3s ease;
+    z-index: 5;
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+}
+
+.side-menu a:hover {
+    background: #f0f0f0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+    <!-- Hamburger -->
+    <div class="hamburger" onclick="openMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="hero-content">
+
+        <!-- TITLE -->
+        <h1 class="page-title">Showcase</h1>
+
+        <!-- FILTER -->
+        <div class="filter-container">
+            <select class="filter-select" onchange="filterProjects(this.value)">
+                <option value="all">All</option>
+                <option value="ux">UX Design</option>
+                <option value="web">Web Development</option>
+                <option value="app">App Design</option>
+            </select>
+        </div>
+
+        <!-- PROJECT GRID -->
+        <div class="project-grid">
+
+            <!-- CARD 1 -->
+            <a href="project1.html" class="project-card" data-category="ux">
+                <img src="project1.jpg" class="project-image">
+                <div class="project-info">
+                    <div class="project-title">Project Title 1</div>
+                    <div class="project-tag">UX Design</div>
+                </div>
+            </a>
+
+            <!-- CARD 2 -->
+            <a href="project2.html" class="project-card" data-category="web">
+                <img src="project2.jpg" class="project-image">
+                <div class="project-info">
+                    <div class="project-title">Project Title 2</div>
+                    <div class="project-tag">Web Development</div>
+                </div>
+            </a>
+
+            <!-- CARD 3 -->
+            <a href="project3.html" class="project-card" data-category="app">
+                <img src="project3.jpg" class="project-image">
+                <div class="project-info">
+                    <div class="project-title">Project Title 3</div>
+                    <div class="project-tag">App Design</div>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- SIDE MENU -->
+<div class="side-menu" id="sideMenu">
+    <div class="close-btn" onclick="closeMenu()">✕</div>
+    <a href="#">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">Personal</a>
+    <a href="#">Contact</a>
+</div>
+
+<script>
+function openMenu() {
+    document.getElementById("sideMenu").classList.add("active");
+}
+
+function closeMenu() {
+    document.getElementById("sideMenu").classList.remove("active");
+}
+
+function filterProjects(category) {
+    const projects = document.querySelectorAll(".project-card");
+
+    projects.forEach(project => {
+        if (category === "all" || project.dataset.category === category) {
+            project.style.display = "block";
+        } else {
+            project.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

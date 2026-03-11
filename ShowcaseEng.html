@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Project Description</title>
+
+<style>
+
+/* ===== RESET ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body,html{
+font-family: Arial, sans-serif;
+height:100%;
+color:white;
+}
+
+/* ===== HERO BACKGROUND ===== */
+
+.hero{
+position:relative;
+min-height:100vh;
+width:100%;
+background:url('background.jpg') center/cover no-repeat;
+display:flex;
+justify-content:center;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.45);
+}
+
+/* ===== CONTENT AREA ===== */
+
+.content{
+position:relative;
+z-index:2;
+width:90%;
+max-width:800px;
+padding-top:80px;
+padding-bottom:80px;
+}
+
+/* ===== TITLE BAR ===== */
+
+.section-title{
+background:rgba(255,255,255,0.5);
+color:black;
+text-align:center;
+padding:10px;
+margin:25px 0;
+font-weight:bold;
+}
+
+/* ===== MAIN HEADING ===== */
+
+.main-heading{
+text-align:center;
+font-size:1.4rem;
+margin-bottom:10px;
+}
+
+.description{
+text-align:center;
+font-size:0.9rem;
+margin-bottom:30px;
+opacity:0.9;
+}
+
+/* ===== SUB HEADINGS ===== */
+
+.sub-heading{
+font-size:1rem;
+margin-bottom:10px;
+}
+
+/* ===== CONTENT BOX ===== */
+
+.box{
+background:rgba(255,255,255,0.5);
+color:black;
+padding:15px;
+border-radius:12px;
+margin-bottom:25px;
+}
+
+.box ul{
+padding-left:18px;
+}
+
+.box li{
+margin-bottom:6px;
+}
+
+/* ===== TOOL / SKILLS GRID ===== */
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.grid div{
+background:rgba(255,255,255,0.6);
+color:black;
+text-align:center;
+padding:8px;
+border-radius:6px;
+font-size:0.9rem;
+}
+
+/* ===== HAMBURGER ===== */
+
+.hamburger{
+position:absolute;
+top:20px;
+right:20px;
+z-index:5;
+cursor:pointer;
+}
+
+.hamburger div{
+width:25px;
+height:3px;
+background:white;
+margin:5px 0;
+}
+
+/* ===== SIDE MENU ===== */
+
+.side-menu{
+position:fixed;
+top:0;
+right:-250px;
+width:250px;
+height:100%;
+background:white;
+padding-top:60px;
+transition:0.3s;
+z-index:10;
+}
+
+.side-menu.active{
+right:0;
+}
+
+.side-menu a{
+display:block;
+padding:15px 20px;
+text-decoration:none;
+color:black;
+font-size:1.1rem;
+}
+
+.side-menu a:hover{
+background:#eee;
+}
+
+.close-btn{
+position:absolute;
+top:15px;
+right:20px;
+font-size:22px;
+cursor:pointer;
+}
+
+/* ===== DESKTOP ===== */
+
+@media(min-width:768px){
+
+.main-heading{
+font-size:2rem;
+}
+
+.description{
+font-size:1rem;
+}
+
+.grid{
+grid-template-columns:repeat(4,1fr);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<!-- Hamburger -->
+<div class="hamburger" onclick="openMenu()">
+<div></div>
+<div></div>
+<div></div>
+</div>
+
+<div class="content">
+
+<!-- TITLE -->
+<div class="section-title">
+Not only Digital field...
+</div>
+
+<!-- HEADING -->
+<h1 class="main-heading">Heading</h1>
+
+<p class="description">
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  
+(Description)
+</p>
+
+<!-- SECTION 1 -->
+<h3 class="sub-heading">Heading 2</h3>
+
+<div class="box">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+<li>Point 4</li>
+<li>Point 5</li>
+</ul>
+</div>
+
+<!-- SECTION 2 -->
+<h3 class="sub-heading">Heading 3</h3>
+
+<div class="box">
+<ul>
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+<li>Point 4</li>
+<li>Point 5</li>
+</ul>
+</div>
+
+<!-- TOOLS -->
+<div class="section-title">
+Tools Used
+</div>
+
+<div class="grid">
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+</div>
+
+<!-- SKILLS -->
+<div class="section-title">
+Skills Demonstrated
+</div>
+
+<div class="grid">
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+<div>6</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- SIDE MENU -->
+
+<div class="side-menu" id="sideMenu">
+<div class="close-btn" onclick="closeMenu()">✕</div>
+<a href="index.html">Home</a>
+<a href="projectsEng.html">Projects</a>
+<a href="personalEng.html">Personal</a>
+<a href="mailto:mokoishun620@gmail.com">Contact</a>
+</div>
+
+<script>
+
+function openMenu(){
+document.getElementById("sideMenu").classList.add("active");
+}
+
+function closeMenu(){
+document.getElementById("sideMenu").classList.remove("active");
+}
+
+</script>
+
+</body>
+</html>

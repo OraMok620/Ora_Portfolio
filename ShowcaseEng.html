@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Project Description</title>
+<title>Projects Showcase</title>
 
 <style>
 
@@ -16,116 +16,108 @@ box-sizing:border-box;
 }
 
 body,html{
-font-family: Arial, sans-serif;
 height:100%;
+font-family:Arial, sans-serif;
 color:white;
 }
 
-/* ===== HERO BACKGROUND ===== */
-
+/* ===== BACKGROUND ===== */
 .hero{
 position:relative;
 min-height:100vh;
-width:100%;
 background:url('background.jpg') center/cover no-repeat;
-display:flex;
-justify-content:center;
+padding:20px;
 }
 
 .hero::before{
 content:"";
 position:absolute;
 inset:0;
-background:rgba(0,0,0,0.45);
+background:rgba(0,0,0,0.4);
 }
-
-/* ===== CONTENT AREA ===== */
 
 .content{
 position:relative;
 z-index:2;
-width:90%;
-max-width:800px;
-padding-top:80px;
-padding-bottom:80px;
+max-width:1200px;
+margin:auto;
 }
 
-/* ===== TITLE BAR ===== */
-
-.section-title{
-background:rgba(255,255,255,0.5);
-color:black;
+/* ===== TITLE ===== */
+.page-title{
 text-align:center;
+font-size:1.6rem;
+margin-top:40px;
+margin-bottom:20px;
+}
+
+/* ===== FILTER ===== */
+.filter-container{
+display:flex;
+justify-content:flex-end;
+margin-bottom:15px;
+}
+
+.filter-select{
+padding:6px 10px;
+border-radius:20px;
+border:none;
+}
+
+/* ===== PROJECT GRID ===== */
+.project-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+/* ===== PROJECT CARD ===== */
+.project-card{
+background:rgba(255,255,255,0.9);
+color:black;
+border-radius:14px;
+overflow:hidden;
+text-decoration:none;
+transition:0.2s;
+}
+
+.project-card:hover{
+transform:scale(1.03);
+}
+
+/* image */
+.project-img{
+width:100%;
+height:110px;
+background:#ddd;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+}
+
+/* text */
+.project-info{
 padding:10px;
-margin:25px 0;
+text-align:center;
+}
+
+.project-title{
+font-size:0.9rem;
 font-weight:bold;
 }
 
-/* ===== MAIN HEADING ===== */
-
-.main-heading{
-text-align:center;
-font-size:1.4rem;
-margin-bottom:10px;
-}
-
-.description{
-text-align:center;
-font-size:0.9rem;
-margin-bottom:30px;
-opacity:0.9;
-}
-
-/* ===== SUB HEADINGS ===== */
-
-.sub-heading{
-font-size:1rem;
-margin-bottom:10px;
-}
-
-/* ===== CONTENT BOX ===== */
-
-.box{
-background:rgba(255,255,255,0.5);
-color:black;
-padding:15px;
-border-radius:12px;
-margin-bottom:25px;
-}
-
-.box ul{
-padding-left:18px;
-}
-
-.box li{
-margin-bottom:6px;
-}
-
-/* ===== TOOL / SKILLS GRID ===== */
-
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:10px;
-margin-top:10px;
-}
-
-.grid div{
-background:rgba(255,255,255,0.6);
-color:black;
-text-align:center;
-padding:8px;
-border-radius:6px;
-font-size:0.9rem;
+.project-tag{
+font-size:0.75rem;
+color:#555;
 }
 
 /* ===== HAMBURGER ===== */
-
 .hamburger{
 position:absolute;
 top:20px;
 right:20px;
-z-index:5;
+z-index:3;
 cursor:pointer;
 }
 
@@ -137,7 +129,6 @@ margin:5px 0;
 }
 
 /* ===== SIDE MENU ===== */
-
 .side-menu{
 position:fixed;
 top:0;
@@ -147,7 +138,7 @@ height:100%;
 background:white;
 padding-top:60px;
 transition:0.3s;
-z-index:10;
+z-index:5;
 }
 
 .side-menu.active{
@@ -163,7 +154,7 @@ font-size:1.1rem;
 }
 
 .side-menu a:hover{
-background:#eee;
+background:#f0f0f0;
 }
 
 .close-btn{
@@ -175,19 +166,14 @@ cursor:pointer;
 }
 
 /* ===== DESKTOP ===== */
-
 @media(min-width:768px){
 
-.main-heading{
+.project-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+.page-title{
 font-size:2rem;
-}
-
-.description{
-font-size:1rem;
-}
-
-.grid{
-grid-template-columns:repeat(4,1fr);
 }
 
 }
@@ -208,86 +194,78 @@ grid-template-columns:repeat(4,1fr);
 
 <div class="content">
 
-<!-- TITLE -->
-<div class="section-title">
-Not only Digital field...
+<h1 class="page-title">Showcase</h1>
+
+<!-- Filter -->
+<div class="filter-container">
+<select class="filter-select" id="filter">
+<option value="all">Filter</option>
+<option value="ux">UX</option>
+<option value="research">Research</option>
+<option value="dev">Development</option>
+</select>
 </div>
 
-<!-- HEADING -->
-<h1 class="main-heading">Heading</h1>
+<!-- Projects -->
+<div class="project-grid" id="projectGrid">
 
-<p class="description">
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  
-(Description)
-</p>
-
-<!-- SECTION 1 -->
-<h3 class="sub-heading">Heading 2</h3>
-
-<div class="box">
-<ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
-<li>Point 4</li>
-<li>Point 5</li>
-</ul>
+<a href="detailsEng.html" class="project-card" data-tag="ux">
+<div class="project-img">
+Image
 </div>
-
-<!-- SECTION 2 -->
-<h3 class="sub-heading">Heading 3</h3>
-
-<div class="box">
-<ul>
-<li>Point 1</li>
-<li>Point 2</li>
-<li>Point 3</li>
-<li>Point 4</li>
-<li>Point 5</li>
-</ul>
+<div class="project-info">
+<div class="project-title">Project Title</div>
+<div class="project-tag">UX</div>
 </div>
+</a>
 
-<!-- TOOLS -->
-<div class="section-title">
-Tools Used
+<a href="detailsEng.html" class="project-card" data-tag="research">
+<div class="project-img">
+Image
 </div>
-
-<div class="grid">
-<div>1</div>
-<div>2</div>
-<div>3</div>
-<div>4</div>
+<div class="project-info">
+<div class="project-title">Project Title</div>
+<div class="project-tag">Research</div>
 </div>
+</a>
 
-<!-- SKILLS -->
-<div class="section-title">
-Skills Demonstrated
+<a href="detailsEng.html" class="project-card" data-tag="dev">
+<div class="project-img">
+Image
 </div>
+<div class="project-info">
+<div class="project-title">Project Title</div>
+<div class="project-tag">Development</div>
+</div>
+</a>
 
-<div class="grid">
-<div>1</div>
-<div>2</div>
-<div>3</div>
-<div>4</div>
-<div>5</div>
-<div>6</div>
+<a href="detailsEng.html" class="project-card" data-tag="ux">
+<div class="project-img">
+Image
+</div>
+<div class="project-info">
+<div class="project-title">Project Title</div>
+<div class="project-tag">UX</div>
+</div>
+</a>
+
 </div>
 
 </div>
-
 </section>
 
 <!-- SIDE MENU -->
-
 <div class="side-menu" id="sideMenu">
 <div class="close-btn" onclick="closeMenu()">✕</div>
 <a href="index.html">Home</a>
-<a href="projectsEng.html">Projects</a>
+<a href="showcaseEng.html">Projects</a>
 <a href="personalEng.html">Personal</a>
 <a href="mailto:mokoishun620@gmail.com">Contact</a>
 </div>
 
 <script>
+
+/* ===== MENU ===== */
 
 function openMenu(){
 document.getElementById("sideMenu").classList.add("active");
@@ -296,6 +274,31 @@ document.getElementById("sideMenu").classList.add("active");
 function closeMenu(){
 document.getElementById("sideMenu").classList.remove("active");
 }
+
+/* ===== FILTER ===== */
+
+const filter = document.getElementById("filter");
+const cards = document.querySelectorAll(".project-card");
+
+filter.addEventListener("change", function(){
+
+const value = this.value;
+
+cards.forEach(card =>{
+
+if(value === "all"){
+card.style.display="block";
+}
+else if(card.dataset.tag === value){
+card.style.display="block";
+}
+else{
+card.style.display="none";
+}
+
+})
+
+});
 
 </script>
 

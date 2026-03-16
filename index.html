@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Portfolio</title>
+<title>Ora's Portfolio_Home</title>
 
 <style>
-/* ====== RESET ====== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ====== BODY ====== */
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
 }
 
-/* ====== HERO SECTION ====== */
+/* ===== HERO ===== */
 .hero {
     position: relative;
     height: 100vh;
@@ -30,21 +28,39 @@ body, html {
     align-items: center;
     text-align: center;
     color: white;
+    overflow: hidden;
 }
 
-/* ====== IMAGE OVERLAY (CHANGE OPACITY HERE) ====== */
+/* Overlay */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4); /* Change 0.4 to 0.3 or 0.5 */
+    background: rgba(0,0,0,0.45);
+    animation: fadeOverlay 1.5s ease forwards;
 }
 
-/* ====== CONTENT CENTER ====== */
+@keyframes fadeOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Center Content */
 .hero-content {
     position: relative;
     z-index: 2;
     padding: 20px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeUp 1.2s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero-content h1 {
@@ -56,12 +72,13 @@ body, html {
     font-size: 1rem;
     font-weight: normal;
     margin-bottom: 20px;
+    line-height: 1.4;
 }
 
-/* ====== CV BUTTON ====== */
+/* CV Button */
 .cv-btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 22px;
     border: 1px solid white;
     color: white;
     text-decoration: none;
@@ -73,33 +90,51 @@ body, html {
     color: black;
 }
 
-/* ====== HAMBURGER ====== */
+/* ===== HAMBURGER ===== */
 .hamburger {
     position: absolute;
     top: 20px;
     right: 20px;
-    z-index: 3;
+    z-index: 6;
     cursor: pointer;
 }
 
 .hamburger div {
-    width: 25px;
+    width: 26px;
     height: 3px;
     background: white;
     margin: 5px 0;
+    transition: 0.3s;
 }
 
-/* ====== SIDE MENU ====== */
+/* ===== MENU OVERLAY ===== */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 4;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== SIDE MENU ===== */
 .side-menu {
     position: fixed;
     top: 0;
-    right: -250px;
-    width: 250px;
+    right: -260px;
+    width: 260px;
     height: 100%;
     background: white;
-    padding-top: 60px;
-    transition: 0.3s ease;
+    padding-top: 70px;
+    transition: right 0.35s cubic-bezier(.77,0,.18,1);
     z-index: 5;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.15);
 }
 
 .side-menu.active {
@@ -108,37 +143,33 @@ body, html {
 
 .side-menu a {
     display: block;
-    padding: 15px 20px;
+    padding: 16px 24px;
     text-decoration: none;
-    color: black;
+    color: #333;
     font-size: 1.1rem;
+    transition: 0.2s;
 }
 
 .side-menu a:hover {
-    background: #f0f0f0;
+    background: #f2f2f2;
+    padding-left: 30px;
 }
 
 /* Close button */
 .close-btn {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 22px;
+    top: 18px;
+    right: 22px;
+    font-size: 24px;
     cursor: pointer;
 }
 
-/* ====== DESKTOP VERSION ====== */
-@media(min-width: 768px) {
-
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-content h2 {
-        font-size: 1.2rem;
-    }
-
+/* ===== DESKTOP ===== */
+@media(min-width:768px){
+    .hero-content h1 { font-size: 2.6rem; }
+    .hero-content h2 { font-size: 1.2rem; }
 }
+
 </style>
 </head>
 
@@ -147,7 +178,7 @@ body, html {
 <section class="hero">
 
     <!-- Hamburger -->
-    <div class="hamburger" onclick="openMenu()">
+    <div class="hamburger" id="hamburger">
         <div></div>
         <div></div>
         <div></div>
@@ -156,29 +187,48 @@ body, html {
     <!-- Center Content -->
     <div class="hero-content">
         <h1>Hi, I am Oi Shun, Mok</h1>
-        <h2>Can call me Ora<br>UX Designer / UX Researcher / Developer</h2>
-        <a href="CV.pdf" class="cv-btn" download>Download CV</a>
+        <h2>Can call me Ora<br>UX Designer / Researcher / Developer</h2>
+        <a href="cv.pdf" class="cv-btn" download>Download CV</a>
     </div>
 
 </section>
 
+<!-- Dark overlay when menu opens -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
 <!-- Side Menu -->
-<div class="side-menu" id="sideMenu">
-    <div class="close-btn" onclick="closeMenu()">✕</div>
-    <a href="indexEng.html">Home</a>
+<nav class="side-menu" id="sideMenu">
+    <div class="close-btn" id="closeBtn">✕</div>
+    <a href="index.html">Home</a>
     <a href="showcaseEng.html">Projects</a>
     <a href="personalEng.html">Personal</a>
     <a href="mailto:mokoishun620@gmail.com">Contact</a>
-</div>
+</nav>
 
 <script>
+const hamburger = document.getElementById("hamburger");
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("menuOverlay");
+const closeBtn = document.getElementById("closeBtn");
+const menuLinks = document.querySelectorAll(".side-menu a");
+
 function openMenu() {
-    document.getElementById("sideMenu").classList.add("active");
+    sideMenu.classList.add("active");
+    overlay.classList.add("active");
 }
 
 function closeMenu() {
-    document.getElementById("sideMenu").classList.remove("active");
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
 }
+
+hamburger.addEventListener("click", openMenu);
+closeBtn.addEventListener("click", closeMenu);
+overlay.addEventListener("click", closeMenu);
+
+menuLinks.forEach(link => {
+    link.addEventListener("click", closeMenu);
+});
 </script>
 
 </body>

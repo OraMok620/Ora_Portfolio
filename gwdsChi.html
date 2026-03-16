@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Project Details</title>
+
+<style>
+
+/* ===== RESET ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body,html{
+font-family:Arial, Helvetica, sans-serif;
+height:100%;
+color:white;
+}
+
+/* ===== HERO BACKGROUND ===== */
+
+.hero{
+position:relative;
+min-height:100vh;
+background:url("bg.jpg") center/cover no-repeat;
+padding:80px 20px 40px 20px;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.5);
+z-index:0;
+}
+
+.container{
+position:relative;
+z-index:1;
+max-width:700px;
+margin:auto;
+}
+
+/* ===== Hamburger ===== */
+
+.hamburger{
+position:absolute;
+top:20px;
+right:20px;
+width:25px;
+cursor:pointer;
+z-index:2;
+}
+
+.hamburger span{
+display:block;
+height:3px;
+background:white;
+margin:5px 0;
+}
+
+/* ===== Menu ===== */
+
+.menu{
+position:fixed;
+top:0;
+right:-250px;
+width:250px;
+height:100%;
+background:white;
+padding:60px 20px;
+transition:0.3s;
+z-index:3;
+}
+
+.menu a{
+display:block;
+margin:20px 0;
+text-decoration:none;
+color:black;
+font-size:1.2rem;
+}
+
+.menu.active{
+right:0;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:20px;
+font-size:1.5rem;
+cursor:pointer;
+}
+
+/* ===== Carousel ===== */
+
+.carousel{
+position:relative;
+margin-bottom:30px;
+}
+
+.slide{
+display:none;
+}
+
+.slide img{
+width:100%;
+border-radius:6px;
+}
+
+.slide.active{
+display:block;
+}
+
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:2rem;
+cursor:pointer;
+user-select:none;
+}
+
+.prev{
+left:10px;
+}
+
+.next{
+right:10px;
+}
+
+/* ===== Text ===== */
+
+h2{
+margin-top:20px;
+margin-bottom:10px;
+font-size:1.4rem;
+}
+
+p{
+line-height:1.6;
+margin-bottom:20px;
+}
+
+/* ===== Tools List ===== */
+
+ul{
+margin-left:20px;
+margin-bottom:30px;
+}
+
+li{
+margin-bottom:6px;
+}
+
+/* ===== Video ===== */
+
+.video{
+margin-bottom:30px;
+}
+
+.video iframe{
+width:100%;
+height:220px;
+border:none;
+}
+
+/* ===== Download Button ===== */
+
+.btn{
+display:inline-block;
+border:1px solid white;
+padding:10px 20px;
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+.btn:hover{
+background:white;
+color:black;
+}
+
+/* ===== Desktop ===== */
+
+@media (min-width:768px){
+
+.video iframe{
+height:350px;
+}
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<section class="hero">
+
+<!-- Hamburger -->
+<div class="hamburger" onclick="openMenu()">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="container">
+
+<!-- ===== Carousel ===== -->
+
+<div class="carousel">
+
+<div class="slide active">
+<img src="example1.jpeg">
+</div>
+
+<div class="slide">
+<img src="example2.jpeg">
+</div>
+
+<div class="slide">
+<img src="example3.jpeg">
+</div>
+
+<div class="arrow prev" onclick="changeSlide(-1)">❮</div>
+<div class="arrow next" onclick="changeSlide(1)">❯</div>
+
+</div>
+
+<!-- ===== Project Overview ===== -->
+
+<h2>Project Overview</h2>
+
+<p>
+This project explores ........
+</p>
+
+<!-- ===== Tools Used ===== -->
+
+<h2>Tools Used</h2>
+
+<ul>
+<li>Figma</li>
+<li>HTML / CSS</li>
+<li>JavaScript</li>
+<li>User Research</li>
+</ul>
+
+<!-- ===== YouTube Video ===== -->
+
+<div class="video">
+
+<iframe
+src="https://www.youtube.com/embed/VIDEO_ID"
+allowfullscreen>
+</iframe>
+
+</div>
+
+<!-- ===== Download Portfolio ===== -->
+
+<a href="portfolio.pdf" class="btn" download>
+Download Portfolio (PDF)
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ===== Side Menu ===== -->
+
+<div class="menu" id="menu">
+
+<div class="close" onclick="closeMenu()">✕</div>
+
+<a href="indexChi.html">Home</a>
+<a href="showcaseChi.html">Projects</a>
+<a href="personalChi.html">Personal</a>
+<a href="mailto:mokoishun620@gmail.com">Contact</a>
+
+</div>
+
+
+<script>
+
+/* ===== MENU ===== */
+
+function openMenu(){
+document.getElementById("menu").classList.add("active");
+}
+
+function closeMenu(){
+document.getElementById("menu").classList.remove("active");
+}
+
+
+/* ===== SLIDESHOW ===== */
+
+let slideIndex = 0
+const slides = document.querySelectorAll(".slide")
+
+function changeSlide(n){
+
+slides[slideIndex].classList.remove("active")
+
+slideIndex = slideIndex + n
+
+if(slideIndex >= slides.length){
+slideIndex = 0
+}
+
+if(slideIndex < 0){
+slideIndex = slides.length - 1
+}
+
+slides[slideIndex].classList.add("active")
+
+}
+
+</script>
+
+</body>
+</html>

@@ -95,8 +95,14 @@ body, html {
     position: absolute;
     top: 20px;
     right: 20px;
-    z-index: 6;
+    z-index: 3;
     cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.hamburger.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .hamburger div {
@@ -104,7 +110,6 @@ body, html {
     height: 3px;
     background: white;
     margin: 5px 0;
-    transition: 0.3s;
 }
 
 /* ===== MENU OVERLAY ===== */
@@ -115,7 +120,7 @@ body, html {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
-    z-index: 4;
+    z-index: 8;
 }
 
 .menu-overlay.active {
@@ -133,7 +138,7 @@ body, html {
     background: white;
     padding-top: 70px;
     transition: right 0.35s cubic-bezier(.77,0,.18,1);
-    z-index: 5;
+    z-index: 10;
     box-shadow: -5px 0 15px rgba(0,0,0,0.15);
 }
 
@@ -160,8 +165,9 @@ body, html {
     position: absolute;
     top: 18px;
     right: 22px;
-    font-size: 24px;
+    font-size: 26px;
     cursor: pointer;
+    z-index: 11;
 }
 
 /* ===== DESKTOP ===== */
@@ -169,7 +175,6 @@ body, html {
     .hero-content h1 { font-size: 2.6rem; }
     .hero-content h2 { font-size: 1.2rem; }
 }
-
 </style>
 </head>
 
@@ -187,8 +192,8 @@ body, html {
     <!-- Center Content -->
     <div class="hero-content">
         <h1>Hi, I am Oi Shun, Mok</h1>
-        <h2>Can call me Ora<br>UX Designer / Researcher / Developer</h2>
-        <a href="cv.pdf" class="cv-btn" download>Download CV</a>
+        <h2>Can call me Ora<br>UX Designer / Developer / Researcher</h2>
+        <a href="CV.pdf" class="cv-btn" download>Download CV</a>
     </div>
 
 </section>
@@ -215,11 +220,13 @@ const menuLinks = document.querySelectorAll(".side-menu a");
 function openMenu() {
     sideMenu.classList.add("active");
     overlay.classList.add("active");
+    hamburger.classList.add("hidden");
 }
 
 function closeMenu() {
     sideMenu.classList.remove("active");
     overlay.classList.remove("active");
+    hamburger.classList.remove("hidden");
 }
 
 hamburger.addEventListener("click", openMenu);

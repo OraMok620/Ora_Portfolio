@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 8</title>
+
+<style>
+
+/* ===== RESET ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body,html{
+height:100%;
+font-family:Arial, sans-serif;
+color:white;
+}
+
+/* ===== HERO BACKGROUND ===== */
+
+.hero{
+position:relative;
+min-height:100vh;
+width:100%;
+background:url('background.jpg') center/cover no-repeat;
+display:flex;
+justify-content:center;
+padding:80px 20px;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.4);
+}
+
+.content{
+position:relative;
+z-index:2;
+max-width:700px;
+width:100%;
+text-align:center;
+}
+
+/* ===== CAROUSEL ===== */
+
+.carousel{
+position:relative;
+margin-bottom:15px;
+}
+
+.carousel img{
+width:100%;
+height:auto;
+max-height:500px;
+object-fit:contain;
+border-radius:5px;
+}
+
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:25px;
+cursor:pointer;
+padding:10px;
+color:white;
+}
+
+.left{
+left:5px;
+}
+
+.right{
+right:5px;
+}
+
+/* ===== DOT INDICATORS ===== */
+
+.dots{
+display:flex;
+justify-content:center;
+margin-bottom:25px;
+gap:8px;
+}
+
+.dot{
+height:8px;
+width:8px;
+background:#bbb;
+border-radius:50%;
+cursor:pointer;
+transition:0.3s;
+}
+
+.dot.active{
+background:white;
+transform:scale(1.2);
+}
+
+/* ===== TEXT CONTENT ===== */
+
+h2{
+margin-top:20px;
+margin-bottom:10px;
+font-size:1.2rem;
+}
+
+p{
+font-size:0.9rem;
+line-height:1.6;
+margin-bottom:20px;
+}
+
+ul{
+list-style-position:inside;
+margin-bottom:25px;
+}
+
+li{
+margin-bottom:6px;
+font-size:0.9rem;
+}
+
+/* ===== BUTTONS ===== */
+
+.button{
+display:inline-block;
+padding:10px 18px;
+border:1px solid white;
+color:white;
+text-decoration:none;
+margin:10px 0;
+transition:.3s;
+}
+
+.button:hover{
+background:white;
+color:black;
+}
+
+/* ===== VIDEO ===== */
+
+.video{
+margin:25px 0;
+}
+
+iframe{
+width:100%;
+height:200px;
+border:none;
+}
+
+/* ===== HAMBURGER ===== */
+
+.hamburger{
+position:absolute;
+top:20px;
+right:20px;
+z-index:9;
+cursor:pointer;
+transition:opacity 0.3s ease;
+}
+
+.hamburger.hidden{
+opacity:0;
+pointer-events:none;
+}
+
+.hamburger div{
+width:26px;
+height:3px;
+background:white;
+margin:5px 0;
+}
+
+/* ===== MENU OVERLAY ===== */
+
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.35);
+opacity:0;
+visibility:hidden;
+transition:opacity 0.3s ease;
+z-index:8;
+}
+
+.menu-overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* ===== SIDE MENU ===== */
+
+.side-menu{
+position:fixed;
+top:0;
+right:-260px;
+width:260px;
+height:100%;
+background:white;
+padding-top:70px;
+transition:right 0.35s cubic-bezier(.77,0,.18,1);
+z-index:10;
+box-shadow:-5px 0 15px rgba(0,0,0,0.15);
+}
+
+.side-menu.active{
+right:0;
+}
+
+.side-menu a{
+display:block;
+padding:16px 24px;
+text-decoration:none;
+color:#333;
+font-size:1.1rem;
+transition:0.2s;
+}
+
+.side-menu a:hover{
+background:#f2f2f2;
+padding-left:30px;
+}
+
+/* ===== CLOSE BUTTON ===== */
+
+.close-btn{
+position:absolute;
+top:18px;
+right:22px;
+font-size:26px;
+cursor:pointer;
+z-index:11;
+color:black;
+}
+
+/* ===== DESKTOP ===== */
+
+@media(min-width:768px){
+
+.carousel img{
+height:280px;
+}
+
+iframe{
+height:350px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<!-- Hamburger -->
+<div class="hamburger" id="hamburger">
+<div></div>
+<div></div>
+<div></div>
+</div>
+
+<div class="content">
+
+<!-- ===== CAROUSEL ===== -->
+
+<div class="carousel">
+
+<span class="arrow left" onclick="prevSlide()">❮</span>
+
+<img id="slide" src="example1.jpeg">
+
+<span class="arrow right" onclick="nextSlide()">❯</span>
+
+</div>
+
+<!-- DOTS -->
+<div class="dots" id="dots"></div>
+
+<!-- ===== PROJECT OVERVIEW ===== -->
+
+<h2>Project Overview</h2>
+
+<p>
+This project aims to hack empathy into user experience (UX), by developing a user interface that modifies layout, colour palette and app’s control in response to user’s emotional state. 
+A progressive web application music player made for this project.
+</p>
+
+<!-- ===== TOOLS USED ===== -->
+
+<h2>Tools and Coding Languages used</h2>
+
+<ul>
+<li>Visual Studio Code</li>
+<li>JavaScript</li>
+<li>HTML</li>
+<li>CSS</li>
+<li>PWA</li>
+</ul>
+
+<!-- ===== VIDEO ===== -->
+
+<div class="video">
+
+<h2>Project Demonstration</h2>
+
+<iframe src="https://www.youtube.com/embed/Mnx-Gk0mllY?si=ivAT7XG6lTKWgt4s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+</div>
+
+<!-- ===== DOWNLOAD PDF ===== -->
+
+<a href="https://kp6wzq.csb.app/" class="button" download>view work</a>
+<a href="https://codesandbox.io/p/sandbox/cpc-semester1-kp6wzq" class="button" download>View code</a>
+
+</div>
+
+</section>
+
+<!-- MENU OVERLAY -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- SIDE MENU -->
+<nav class="side-menu" id="sideMenu">
+
+<div class="close-btn" id="closeBtn">✕</div>
+
+<a href="index.html">Home</a>
+<a href="showcase.html">Projects</a>
+<a href="personal.html">Personal</a>
+<a href="mailto:mokoishun620@gmail.com">Contact</a>
+
+</nav>
+
+<script>
+
+/* ===== MENU ===== */
+
+const hamburger = document.getElementById("hamburger");
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("menuOverlay");
+const closeBtn = document.getElementById("closeBtn");
+const menuLinks = document.querySelectorAll(".side-menu a");
+
+function openMenu(){
+sideMenu.classList.add("active");
+overlay.classList.add("active");
+hamburger.classList.add("hidden");
+}
+
+function closeMenu(){
+sideMenu.classList.remove("active");
+overlay.classList.remove("active");
+hamburger.classList.remove("hidden");
+}
+
+hamburger.addEventListener("click", openMenu);
+closeBtn.addEventListener("click", closeMenu);
+overlay.addEventListener("click", closeMenu);
+
+menuLinks.forEach(link=>{
+link.addEventListener("click", closeMenu);
+});
+
+/* ===== CAROUSEL ===== */
+
+let slides=[
+"cpc2.png",
+"cpc3.png",
+"cpc4.png"
+];
+
+let index=0;
+
+const slideImg=document.getElementById("slide")
+const dotsContainer=document.getElementById("dots")
+
+function createDots(){
+
+slides.forEach((_,i)=>{
+
+let dot=document.createElement("div")
+dot.classList.add("dot")
+
+dot.addEventListener("click",()=>{
+index=i
+showSlide()
+})
+
+dotsContainer.appendChild(dot)
+
+})
+
+}
+
+function updateDots(){
+
+const dots=document.querySelectorAll(".dot")
+
+dots.forEach(dot=>dot.classList.remove("active"))
+
+dots[index].classList.add("active")
+
+}
+
+function showSlide(){
+
+slideImg.src=slides[index]
+updateDots()
+
+}
+
+function nextSlide(){
+
+index++
+
+if(index>=slides.length){
+index=0
+}
+
+showSlide()
+
+}
+
+function prevSlide(){
+
+index--
+
+if(index<0){
+index=slides.length-1
+}
+
+showSlide()
+
+}
+
+/* init */
+
+createDots()
+showSlide()
+
+</script>
+
+</body>
+</html>
